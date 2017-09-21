@@ -1,6 +1,8 @@
 const initialState = {
 	loggedIn: false,
-	loginError: ''
+	loginError: '',
+	registered: false,
+	registeredUsers: []
 }
 
 export function userReducer(state=initialState, action) {
@@ -12,7 +14,7 @@ export function userReducer(state=initialState, action) {
 				loggedIn: true,
 				loginError: ''
 			}
-		
+
 		case 'LOGIN_USER_FAIL':
 			return {
 				...state,
@@ -24,6 +26,13 @@ export function userReducer(state=initialState, action) {
 			return {
 				...state,
 				loggedIn: false
+			}
+
+		case 'REGISTER_USER':
+			state.registeredUsers.push(action.registeredUsers)
+			return {
+				...state,
+				registeredUsers: state.registeredUsers
 			}
 
 		default:

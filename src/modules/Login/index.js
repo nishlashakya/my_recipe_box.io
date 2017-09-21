@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import {loginUser, logoutUser} from '../../actions/userActions';
+import { Form, FormGroup, FormControl, Col, ControlLabel, Checkbox, Button } from 'react-bootstrap';
 
 class LoginPage extends Component {
 
@@ -42,12 +43,41 @@ class LoginPage extends Component {
 					</div> :
 					<div>
 						<h3>Login</h3><br />
-						<form>
-							Username: <input name='username' type='text' value={this.state.username} onChange={this.handleChange} /><br />
-							password: <input name='password' type='password' value={this.state.password} onChange={this.handleChange}/><br />
-							<button onClick={this.handleSubmit.bind(this)}> login </button>
 
-						</form>
+						<Form horizontal>
+							<FormGroup controlId="formHorizontalUsername">
+								<Col componentClass={ControlLabel} sm={2} md={2}>
+									Username
+								</Col>
+								<Col sm={10} md={4}>
+									<FormControl name='username' type='text' value={this.state.username} onChange={this.handleChange} placeholder="Username"/>
+								</Col>
+							</FormGroup>
+
+							<FormGroup controlId="formHorizontalPassword">
+								<Col componentClass={ControlLabel} sm={2} md={2}>
+									Password
+								</Col>
+								<Col sm={10} md={4}>
+									<FormControl type="password" placeholder="Password" name='password' value={this.state.password} onChange={this.handleChange} />
+								</Col>
+							</FormGroup>
+
+							<FormGroup>
+								<Col smOffset={2} sm={10}>
+									<Checkbox>Remember me</Checkbox>
+								</Col>
+							</FormGroup>
+
+							<FormGroup>
+								<Col smOffset={2} sm={10}>
+									<Button type="submit" onClick={this.handleSubmit.bind(this)}>
+										Sign in
+									</Button>
+								</Col>
+							</FormGroup>
+						</Form>
+
 					</div>
 				}
 				{this.props.message && <p> {this.props.message} </p>}
@@ -60,7 +90,7 @@ class LoginPage extends Component {
 const mapStateToProps = (store) => {
 	return {
 		loggedIn: store.user.loggedIn,
-		message: store.user.message
+		message: store.user.loginError
 	}
 }
 

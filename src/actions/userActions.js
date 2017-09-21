@@ -17,3 +17,15 @@ export function logoutUser() {
     type: 'LOGOUT_USER'
   }
 }
+
+export function registerUser(data) {
+  return {
+    type: 'REGISTER_USER',
+    registeredUsers: {
+      email: data.email,
+			phoneNumber: data.phoneNumber,
+			username: data.username,
+			password: data.password
+    }
+  }
+}
