@@ -8,7 +8,8 @@ export function recipeReducer(state=initialState, action) {
 		case 'ADD_RECIPE':
 			state.recipes.push(action.recipe)
 			return {
-				...state
+				...state,
+				recipes: state.recipes
 			}
 
 		default:
