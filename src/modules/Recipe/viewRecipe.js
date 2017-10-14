@@ -9,8 +9,8 @@ class ViewRecipePage extends Component {
 
   constructor(props) {
     super(props);
-    console.log(',,,,,,,,,,,,,,,,,', props);
-    console.log(',,,,,,,,,,,,,1,,,,', this.props);
+    console.log(',,,,,,,,,2,,,,,,,,', props);
+    console.log(',,,,,,,3,,,,,,1,,,,', this.props);
   }
 
 	render() {
@@ -42,7 +42,7 @@ class ViewRecipePage extends Component {
 }
 
 const mapStateToProps = (store) => {
-  console.log(',,,,,,,,,,,,,,,,,', store.recipe);
+  console.log(',,,,,,,1,,,,,,,,,,', store.recipe);
 	return {
 		recipe: store.recipe.recipes
 	}

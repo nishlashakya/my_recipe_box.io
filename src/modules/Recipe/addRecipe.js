@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router'
 import { connect } from 'react-redux';
 
 import { bindActionCreators } from 'redux';
@@ -10,6 +11,8 @@ class AddRecipePage extends Component {
 
 	constructor(props) {
 		super(props);
+		console.log(',,,,,,,,,,,,,,,,,,,here', props);
+
 		this.state = {
       title: '',
       description: '',
@@ -77,8 +80,19 @@ class AddRecipePage extends Component {
   }
 
 	handleAddRecipe = (e) => {
+
 		e.preventDefault();
-		this.props.addRecipe(this.state);
+
+		this.props.addRecipe(this.state)
+		.then((res) => {
+			this.props.router.push('/viewRecipe');
+			console.log('Recipe added successfully');
+		})
+		.catch((err) => {
+			console.log('oops, we got error');
+		})
+
+
 	}
 	render() {
 		return (
@@ -180,6 +194,8 @@ class AddRecipePage extends Component {
 
 const mapStateToProps = (store) => {
 	return {
+		recipes: store.recipe.recipes,
+		recipeAddSuccesss: store.recipe.recipeAddSuccesss,
 	}
 }
 
@@ -189,4 +205,4 @@ const mapDispatchToProps = (dispatch) => {
 	}, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddRecipePage)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AddRecipePage))
