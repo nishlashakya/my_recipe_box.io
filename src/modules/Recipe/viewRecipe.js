@@ -9,6 +9,8 @@ class ViewRecipePage extends Component {
 
   constructor(props) {
     super(props);
+    console.log(',,,,,,,,,,,,,,,,,', props);
+    console.log(',,,,,,,,,,,,,1,,,,', this.props);
   }
 
 	render() {
@@ -17,15 +19,21 @@ class ViewRecipePage extends Component {
         <h2> Recipes </h2>
         <Grid>
           <Row>
-            <Col xs={6} md={4}>
-              <Thumbnail src="/assets/thumbnaildiv.png" alt="242x200">
-                <h3>Recipe Name</h3>
-                <p>Description</p>
-                <p>
-                  <Button bsStyle="primary">View details</Button>&nbsp;
-                </p>
-              </Thumbnail>
-            </Col>
+            {
+              this.props.recipe.map((recipe, i) => {
+                return (
+                  <Col xs={6} md={4} key={i}>
+                    <Thumbnail src={recipe.photo} alt="242x200">
+                      <h3>{recipe.title}</h3>
+                      <p>{recipe.description}</p>
+                      <p>
+                        <Button bsStyle="primary" onClick={}>View details</Button>&nbsp;
+                      </p>
+                    </Thumbnail>
+                  </Col>
+                )
+              })
+            }
           </Row>
         </Grid>
 			</div>
@@ -34,6 +42,7 @@ class ViewRecipePage extends Component {
 }
 
 const mapStateToProps = (store) => {
+  console.log(',,,,,,,,,,,,,,,,,', store.recipe);
 	return {
 		recipe: store.recipe.recipes
 	}
