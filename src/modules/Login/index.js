@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-
 import { bindActionCreators } from 'redux';
 
 import {loginUser, logoutUser} from '../../actions/userActions';
@@ -11,7 +11,7 @@ class LoginPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			username: '',
+			email: '',
 			password: '',
 		}
 	}
@@ -24,7 +24,14 @@ class LoginPage extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		this.props.loginUser(this.state);
+		this.props.loginUser(this.state)
+		.then((res) => {
+			this.props.router.push('/');
+			console.log('login successful');
+		})
+		.catch((err) => {
+			console.log('oops, we got error');
+		})
 	}
 
 	handleLogout = (e) => {
@@ -45,12 +52,12 @@ class LoginPage extends Component {
 						<h3>Login</h3><br />
 
 						<Form horizontal>
-							<FormGroup controlId="formHorizontalUsername">
+							<FormGroup controlId="formHorizontalemail">
 								<Col componentClass={ControlLabel} sm={2} md={2}>
-									Username
+									Email
 								</Col>
 								<Col sm={10} md={4}>
-									<FormControl name='username' type='text' value={this.state.username} onChange={this.handleChange} placeholder="Username"/>
+									<FormControl name='email' type='email' value={this.state.email} onChange={this.handleChange} placeholder="Email"/>
 								</Col>
 							</FormGroup>
 
@@ -101,4 +108,4 @@ const mapDispatchToProps = (dispatch) => {
 	}, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LoginPage))

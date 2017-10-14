@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router';
 
 import {registerUser} from '../../actions/userActions';
-import { Form, FormGroup, FormControl, Col, ControlLabel, Button } from 'react-bootstrap';
+import { Form, FormGroup, FormControl, Col, ControlLabel, Button, Alert } from 'react-bootstrap';
 
 class RegisterPage extends Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
+			firstName: '',
+			lastName: '',
 			email: '',
 			phoneNumber: '',
-			username: '',
 			password: ''
 		}
 	}
@@ -26,12 +27,24 @@ class RegisterPage extends Component {
 
 	handleRegister = (e) => {
 		e.preventDefault();
-		this.props.registerUser(this.state);
+		this.props.registerUser(this.state)
+		.then((data) => {
+			this.props.router.push('/login');
+			console.log('registered successfully');
+		})
+		.catch((err) => {
+			console.log('error caught', err);
+		});
 	}
+
 	render() {
 		return (
 			<div className="container">
 				<h3>Register</h3><br />
+
+				<Alert bsStyle="warning">
+	    		Fill up the following information
+	  		</Alert>
 
 				<Form horizontal>
 					<FormGroup controlId="formHorizontalEmail">
@@ -52,15 +65,6 @@ class RegisterPage extends Component {
 						</Col>
 					</FormGroup>
 
-					<FormGroup controlId="formHorizontalUsername">
-						<Col componentClass={ControlLabel} sm={2} md={2}>
-							Username
-						</Col>
-						<Col sm={10} md={4}>
-							<FormControl name='username' type='text' value={this.state.username} onChange={this.handleChange} placeholder="Username"/>
-						</Col>
-					</FormGroup>
-
 					<FormGroup controlId="formHorizontalPassword">
 						<Col componentClass={ControlLabel} sm={2} md={2}>
 							Password
@@ -78,7 +82,6 @@ class RegisterPage extends Component {
 						</Col>
 					</FormGroup>
 				</Form>
-				<p className="well">This is a sample registration page. You can edit <code>src/modules/Register/index.js</code> to edit this page.</p>
 			</div>
 		);
 	}
@@ -96,4 +99,4 @@ const mapDispatchToProps = (dispatch) => {
 	}, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(RegisterPage))
