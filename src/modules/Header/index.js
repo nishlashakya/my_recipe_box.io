@@ -21,12 +21,17 @@ class Header extends Component {
 					</div>
 
 					<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul className="nav navbar-nav navbar-right">
-							{!this.props.loggedIn &&
+						{!this.props.loggedInUser ?
+							<ul className="nav navbar-nav navbar-right">
 								<li><Link to={'/login'}>Login</Link></li>
-							}
-							<li><Link to={'/register'}>Register</Link></li>
-						</ul>
+								<li><Link to={'/register'}>Register</Link></li>
+							</ul>
+							:
+							<ul className="nav navbar-nav navbar-right">
+								<li><a>Welcome {this.props.loggedInUser.email}</a></li>
+								<li><Link onClick={() => {}}>Logout</Link></li>
+							</ul>
+						}
 					</div>
 				</div>
 			</nav>
@@ -36,7 +41,7 @@ class Header extends Component {
 
 const mapStateToProps = (store) => {
 	return {
-		loggedIn: store.user.loggedIn
+		loggedInUser: store.user.loggedInUser
 	}
 }
 
