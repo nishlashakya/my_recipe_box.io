@@ -27,7 +27,7 @@ class ViewRecipePage extends Component {
                       <h3>{recipe.title}</h3>
                       <p>{recipe.description}</p>
                       <p>
-                        <Button bsStyle="primary" onClick={}>View details</Button>&nbsp;
+                        <Button bsStyle="primary">View details</Button>&nbsp;
                       </p>
                     </Thumbnail>
                   </Col>
