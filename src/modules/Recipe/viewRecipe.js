@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {withRouter} from 'react-router';
 import { bindActionCreators } from 'redux';
+
+import {viewRecipeDetail} from '../../actions/recipeActions';
 
 import { Grid, Row, Col, Button, Thumbnail } from 'react-bootstrap';
 
@@ -9,9 +12,19 @@ class ViewRecipePage extends Component {
 
   constructor(props) {
     super(props);
-    console.log(',,,,,,,,,2,,,,,,,,', props);
-    console.log(',,,,,,,3,,,,,,1,,,,', this.props);
   }
+	handleView = (e) => {
+		e.preventDefault();
+		this.props.viewRecipeDetail(e.target.dataset.id)
+		.then((res) => {
+			this.props.router.push('/viewRecipeDetail');
+			console.log('Recipe detail View', res);
+		})
+		.catch((err) => {
+			console.log('oops, we got error');
+		})
+
+	}
 
 	render() {
 		return (
@@ -27,7 +40,7 @@ class ViewRecipePage extends Component {
                       <h3>{recipe.title}</h3>
                       <p>{recipe.description}</p>
                       <p>
-                        <Button bsStyle="primary">View details</Button>&nbsp;
+                        <Button bsStyle="primary" data-id={recipe._id} onClick={this.handleView}>View details</Button>&nbsp;
                       </p>
                     </Thumbnail>
                   </Col>
@@ -42,7 +55,6 @@ class ViewRecipePage extends Component {
 }
 
 const mapStateToProps = (store) => {
-  console.log(',,,,,,,1,,,,,,,,,,', store.recipe);
 	return {
 		recipe: store.recipe.recipes
 	}
@@ -50,7 +62,8 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
+		viewRecipeDetail
 	}, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewRecipePage)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewRecipePage))

@@ -7,6 +7,7 @@ import LoginPage from './modules/Login';
 import RegisterPage from './modules/Register';
 import AddRecipePage from './modules/Recipe/addRecipe';
 import ViewRecipePage from './modules/Recipe/viewRecipe';
+import ViewRecipeDetail from './modules/Recipe/viewRecipeDetail';
 
 export default (
 	<Route path="/" component={App}>
@@ -15,5 +16,6 @@ export default (
 		<Route path="/register" component={RegisterPage} />
 		<Route path="/addRecipe" component={AddRecipePage} />
 		<Route path="/viewRecipe" component={ViewRecipePage} />
+		<Route path="/viewRecipeDetail" component={ViewRecipeDetail} />
 	</Route>
 )
