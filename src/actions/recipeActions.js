@@ -67,6 +67,37 @@ function recipeViewError(err) {
 	}
 }
 
+
+export function editRecipePage(data) {
+	return dispatch => {
+		return new Promise((resolve, reject) => {
+			recipeServices.editRecipePage(data)
+			.then(data => {
+				dispatch(editRecipePageSuccess(data));
+				resolve(data);
+			})
+			.catch(err => {
+				dispatch(editRecipePageError(data));
+				reject(err);
+			})
+		});
+	}
+}
+
+function editRecipePageSuccess(res) {
+	return {
+		type: 'EDIT_RECIPE_PAGE_SUCCESS',
+		res
+	}
+}
+
+function editRecipePageError(err) {
+	return {
+		type: 'EDIT_RECIPE_PAGE_ERROR',
+		err
+	}
+}
+
 export function editRecipe(data) {
 	return dispatch => {
 		return new Promise((resolve, reject) => {
@@ -93,6 +124,36 @@ function recipeUpdateSuccess(data) {
 function recipeUpdateError(err) {
 	return {
 		type: 'UPDATE_RECIPE_ERROR',
+		err
+	}
+}
+
+export function viewAllRecipes() {
+	return dispatch => {
+		return new Promise((resolve, reject) => {
+			recipeServices.viewAllRecipes()
+			.then((data) => {
+				dispatch(viewAllRecipesSuccess(data));
+				resolve(data);
+			})
+			.catch((err) => {
+				dispatch(viewAllRecipesError());
+				reject(err);
+			})
+		});
+	}
+}
+
+function viewAllRecipesSuccess(res) {
+	return {
+		type: 'VIEW_ALL_RECIPES_SUCCESS',
+		res
+	}
+}
+
+function viewAllRecipesError(err) {
+	return {
+		type: 'VIEW_ALL_RECIPES_ERROR',
 		err
 	}
 }

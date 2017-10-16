@@ -5,5 +5,6 @@ export default {
 		ADD_RECIPE 					: SERVER_URL + 'recipes/addRecipe',
 		EDIT_RECIPE					: SERVER_URL + 'recipes/editRecipe/',
 		DELETE_RECIPE				: SERVER_URL + 'recipes/',
-		VIEW_RECIPE_DETAIL	: SERVER_URL + 'recipes/viewRecipeDetail/'
+		VIEW_RECIPE_DETAIL	: SERVER_URL + 'recipes/viewRecipeDetail/',
+		VIEW_ALL_RECIPES	  : SERVER_URL + 'recipes/viewAllRecipes'
 }

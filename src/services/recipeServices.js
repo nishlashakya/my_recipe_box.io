@@ -14,14 +14,23 @@ export function editRecipe(data) {
 		axios.post(APIConstants.EDIT_RECIPE + data)
 		.then(res => (resolve(res.data)))
 		.catch(err => (reject(err.response.data)));
-	})
+	});
 }
+
+export function editRecipePage(data) {
+  return new Promise((resolve, reject) => {
+    axios.get(APIConstants.EDIT_RECIPE + data)
+    .then(res => (resolve(res.data)))
+    .catch(err => (reject(err.response.data)));
+  });
+}
+
 export function deleteRecipe(data) {
 	return new Promise((resolve, reject) => {
 		axios.delete(APIConstants.DELETE_RECIPE + data)
 		.then(res => (resolve(res.data)))
 		.catch(err => (reject(err.response.data)));
-	})
+	});
 }
 
 export function viewRecipeDetail(data) {
@@ -36,4 +45,13 @@ export function viewRecipeDetail(data) {
 		.then(res => (resolve(res.data)))
 		.catch(err => (reject(err.response.data)));
 	})
+}
+
+export function viewAllRecipes() {
+  return new Promise(function(resolve, reject) {
+    axios.get(APIConstants.VIEW_ALL_RECIPES)
+    .then(res => (resolve(res.data)))
+    .catch(err => (reject(err.response.data)));
+  });
+
 }

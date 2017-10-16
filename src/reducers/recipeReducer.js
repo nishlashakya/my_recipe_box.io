@@ -2,24 +2,26 @@ const initialState = {
 	// recipes: localStorage.getItem('recipe') && Object.keys(localStorage.getItem('recipe')).length ? JSON.parse(localStorage.getItem('recipe')) : null,
 	recipes: [],
 	detailRecipe: [],
+	recipeList: [],
 	recipeAddSuccesss: false,
 	recipeAddError: null,
 	recipeViewSuccesss: false,
 	recipeViewError: null,
+	recipeViewAllSuccess: false,
+	recipeViewAllError: null,
+	editRecipe: {}
+	recipeEditPageSuccess: false,
+	recipeEditPageError: null
 };
 
 export function recipeReducer(state=initialState, action) {
 
 	switch(action.type) {
 		case 'ADD_RECIPE_SUCCESS':
-			// state.recipes.push(action.recipe)
-			// localStorage.setItem('recipe', JSON.stringify(action.recipe.doc));
 			return {
 				...state,
-				// recipes: action.recipe.doc,
 				recipeAddSuccesss: true,
 				recipeAddError: null,
-				recipes: state.recipes.concat(action.recipe.doc)
 			}
 
 		case 'ADD_RECIPE_FAIL':
@@ -37,6 +39,36 @@ export function recipeReducer(state=initialState, action) {
 				recipeViewError: null,
 				detailRecipe: action.detailRecipe.recipe
 
+			}
+
+		case 'VIEW_ALL_RECIPES_SUCCESS':
+			return {
+				...state,
+				recipeViewAllSuccess: true,
+				recipeViewAllError: null,
+				recipeList: action.res
+			}
+
+		case 'VIEW_ALL_RECIPES_ERROR':
+			return {
+				...state,
+				recipeViewAllSuccess: false,
+				recipeViewAllError: null,
+			}
+
+		case 'EDIT_RECIPE_PAGE_SUCCESS':
+			return {
+				...state,
+				recipeEditPageSuccess: true,
+				recipeEditPageError: null,
+				recipeEdit: action.res
+			}
+
+		case 'EDIT_RECIPE_PAGE_ERROR':
+			return {
+				...state,
+				recipeEditPageSuccess: false,
+				recipeEditPageError: null,
 			}
 
 

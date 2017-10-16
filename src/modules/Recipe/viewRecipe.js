@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {withRouter} from 'react-router';
 import { bindActionCreators } from 'redux';
 
-import {viewRecipeDetail} from '../../actions/recipeActions';
+import {viewRecipeDetail, viewAllRecipes, editRecipePage} from '../../actions/recipeActions';
 
 import { Grid, Row, Col, Button, Thumbnail } from 'react-bootstrap';
 
@@ -13,11 +13,15 @@ class ViewRecipePage extends Component {
   constructor(props) {
     super(props);
   }
+
+  componentDidMount() {
+    this.props.viewAllRecipes();
+  }
 	handleView = (e) => {
 		e.preventDefault();
 		this.props.viewRecipeDetail(e.target.dataset.id)
 		.then((res) => {
-			this.props.router.push('/viewRecipeDetail');
+			// this.props.router.push('/viewRecipeDetail');
 			console.log('Recipe detail View', res);
 		})
 		.catch((err) => {
@@ -25,6 +29,11 @@ class ViewRecipePage extends Component {
 		})
 
 	}
+  handleEdit = (e) => {
+    e.preventDefault();
+    this.props.editRecipePage(e.target.dataset.id);
+    console.log('id...........', e.target.dataset.id);
+  }
 
 	render() {
 		return (
@@ -33,7 +42,7 @@ class ViewRecipePage extends Component {
         <Grid>
           <Row>
             {
-              this.props.recipe.map((recipe, i) => {
+              this.props.recipeList.map((recipe, i) => {
                 return (
                   <Col xs={6} md={4} key={i}>
                     <Thumbnail src={recipe.photo} alt="242x200">
@@ -41,6 +50,7 @@ class ViewRecipePage extends Component {
                       <p>{recipe.description}</p>
                       <p>
                         <Button bsStyle="primary" data-id={recipe._id} onClick={this.handleView}>View details</Button>&nbsp;
+                        <Button bsStyle="primary" data-id={recipe._id} onClick={this.handleEdit}>Edit recipe</Button>&nbsp;
                       </p>
                     </Thumbnail>
                   </Col>
@@ -56,13 +66,16 @@ class ViewRecipePage extends Component {
 
 const mapStateToProps = (store) => {
 	return {
-		recipe: store.recipe.recipes
+		recipe: store.recipe.recipes,
+    recipeList: store.recipe.recipeList
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-		viewRecipeDetail
+		viewRecipeDetail,
+    viewAllRecipes,
+    editRecipePage
 	}, dispatch);
 }
 
