@@ -1,5 +1,7 @@
+import {logoutUser, saveUser, getUser} from '../utils/sessionManager'
+
 const initialState = {
-	loggedInUser: localStorage.getItem('user') && Object.keys(localStorage.getItem('user')).length ? JSON.parse(localStorage.getItem('user')) : null,
+	loggedInUser: getUser(),
 	loggedIn: false,
 	loginSuccess: false,
 	loginError: null,
@@ -11,7 +13,7 @@ export function userReducer(state=initialState, action) {
 	switch (action.type) {
 
 		case 'LOGIN_USER_SUCCESS':
-			localStorage.setItem('user', JSON.stringify(action.res));
+			saveUser(action.res);
 			return {
 				...state,
 				loginSuccess: true,
@@ -30,6 +32,7 @@ export function userReducer(state=initialState, action) {
 			}
 
 		case 'LOGOUT_USER':
+			logoutUser();
 			return {
 				...state,
 				loggedIn: false

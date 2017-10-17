@@ -1,7 +1,7 @@
 const initialState = {
 	// recipes: localStorage.getItem('recipe') && Object.keys(localStorage.getItem('recipe')).length ? JSON.parse(localStorage.getItem('recipe')) : null,
 	recipes: [],
-	detailRecipe: [],
+	detailRecipe: {},
 	recipeList: [],
 	recipeAddSuccesss: false,
 	recipeAddError: null,
@@ -9,7 +9,7 @@ const initialState = {
 	recipeViewError: null,
 	recipeViewAllSuccess: false,
 	recipeViewAllError: null,
-	editRecipe: {}
+	editRecipe: {},
 	recipeEditPageSuccess: false,
 	recipeEditPageError: null
 };
@@ -37,7 +37,7 @@ export function recipeReducer(state=initialState, action) {
 				...state,
 				recipeViewSuccess: true,
 				recipeViewError: null,
-				detailRecipe: action.detailRecipe.recipe
+				detailRecipe: action.res[0]
 
 			}
 

@@ -21,7 +21,7 @@ class ViewRecipePage extends Component {
 		e.preventDefault();
 		this.props.viewRecipeDetail(e.target.dataset.id)
 		.then((res) => {
-			// this.props.router.push('/viewRecipeDetail');
+			this.props.router.push('/viewRecipeDetail');
 			console.log('Recipe detail View', res);
 		})
 		.catch((err) => {

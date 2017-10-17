@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import {logoutUser} from '../../actions/userActions';
+
 
 import './style.css';
 
 class Header extends Component {
+
+	handleLogout = (e) => {
+		e.preventDefault();
+		this.props.logoutUser();
+	}
 
 	render() {
 		return (
@@ -29,7 +38,7 @@ class Header extends Component {
 							:
 							<ul className="nav navbar-nav navbar-right">
 								<li><a>Welcome {this.props.loggedInUser.email}</a></li>
-								<li><Link onClick={() => {}}>Logout</Link></li>
+								<li><Link onClick={this.handleLogout}>Logout</Link></li>
 							</ul>
 						}
 					</div>
@@ -44,5 +53,10 @@ const mapStateToProps = (store) => {
 		loggedInUser: store.user.loggedInUser
 	}
 }
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators({
+		logoutUser
+	}, dispatch);
+}
 
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

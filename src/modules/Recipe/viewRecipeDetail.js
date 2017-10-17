@@ -10,9 +10,25 @@ class ViewRecipeDetail extends Component {
 	}
 	render() {
 		return(
-			<div> i am detail page
+			<div>
 				<p><span>RECIPE NAME:</span>{this.props.recipe.title}</p>
 				<p><span>DESCRIPTION:</span>{this.props.recipe.description}</p>
+				<p><span>INGREDIENTS:</span></p>
+					<ul>
+						{ this.props.recipe.ingredients.map((ingredient) => {
+							return (
+								<li> {ingredient.ingredient} </li>
+							)}
+						)}
+					</ul>
+				<p><span>DIRECTIONS:</span></p>
+					<ul>
+						{ this.props.recipe.directions.map((direction) => {
+							return (
+								<li> {direction.step} </li>
+							)}
+						)}
+					</ul>
 
 
 			</div>

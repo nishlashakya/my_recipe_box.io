@@ -53,10 +53,10 @@ export function viewRecipeDetail(data) {
 	}
 }
 
-function recipeViewSuccess(data) {
+function recipeViewSuccess(res) {
 	return {
 		type: 'VIEW_RECIPE_SUCCESS',
-		detailRecipe: data
+		res
 	}
 }
 
