@@ -1,4 +1,6 @@
 import * as recipeServices from '../services/recipeServices';
+import axios from 'axios';
+import APIConstants from '../constants/APIConstants';
 
 export function addRecipe(data) {
 	return dispatch => {
@@ -31,10 +33,13 @@ function recipeAddError(err) {
 }
 
 export function deleteRecipe(data) {
-    return {
-      type: 'DELETE_RECIPE',
-      recipe: data
-    }
+	return dispatch => {
+		return new Promise(function(resolve, reject) {
+			axios.delete(APIConstants.DELETE_RECIPE + data)
+			.then(res => (resolve(res.data)))
+			.catch(err => (reject(err)));
+		});
+	}
 }
 
 export function viewRecipeDetail(data) {

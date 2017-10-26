@@ -47,6 +47,26 @@ class RegisterPage extends Component {
 	  		</Alert>
 
 				<Form horizontal>
+
+					<FormGroup controlId="formHorizontalFirstname">
+						<Col componentClass={ControlLabel} sm={2} md={2}>
+							First Name
+						</Col>
+						<Col sm={10} md={4}>
+							<FormControl name='firstName' type='text' value={this.state.firstName} onChange={this.handleChange} placeholder="First Name"/>
+						</Col>
+					</FormGroup>
+
+					<FormGroup controlId="formHorizontalLatname">
+						<Col componentClass={ControlLabel} sm={2} md={2}>
+							Last Name
+						</Col>
+						<Col sm={10} md={4}>
+							<FormControl name='lastName' type='text' value={this.state.lastName} onChange={this.handleChange} placeholder="Last Name"/>
+						</Col>
+					</FormGroup>
+
+
 					<FormGroup controlId="formHorizontalEmail">
 						<Col componentClass={ControlLabel} sm={2} md={2}>
 							Email

@@ -26,7 +26,7 @@ class Header extends Component {
 							<span className="icon-bar"></span>
 							<span className="icon-bar"></span>
 						</button>
-						<Link to={'/'} className="navbar-brand">Example</Link>
+						<Link to={'/'} className="navbar-brand">RECIPE BOX</Link>
 					</div>
 
 					<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -37,7 +37,8 @@ class Header extends Component {
 							</ul>
 							:
 							<ul className="nav navbar-nav navbar-right">
-								<li><a>Welcome {this.props.loggedInUser.email}</a></li>
+								<li><Link to={"/recipe/add/"}>Add recipe</Link></li>
+								<li><a>Welcome {this.props.loggedInUser.firstName}</a></li>
 								<li><Link onClick={this.handleLogout}>Logout</Link></li>
 							</ul>
 						}

@@ -38,7 +38,6 @@ export function recipeReducer(state=initialState, action) {
 				recipeViewSuccess: true,
 				recipeViewError: null,
 				detailRecipe: action.res[0]
-
 			}
 
 		case 'VIEW_ALL_RECIPES_SUCCESS':

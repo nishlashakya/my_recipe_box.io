@@ -11,7 +11,6 @@ class AddRecipePage extends Component {
 
 	constructor(props) {
 		super(props);
-		console.log(',,,,,,,,,,,,,,,,,,,here', props);
 
 		this.state = {
       title: '',
@@ -27,6 +26,7 @@ class AddRecipePage extends Component {
 			}],
 		}
 	}
+
 	handleChange = (e) => {
 		this.setState({
 			[e.target.name]: e.target.value
@@ -85,8 +85,8 @@ class AddRecipePage extends Component {
 
 		this.props.addRecipe(this.state)
 		.then((res) => {
-			this.props.router.push('/viewRecipe');
 			console.log('Recipe added successfully');
+			this.props.router.push('/recipe/view/' + res._id);
 		})
 		.catch((err) => {
 			console.log('oops, we got error');
