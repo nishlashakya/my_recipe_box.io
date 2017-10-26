@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {viewRecipeDetail} from '../../actions/recipeActions';
 
+import { Grid, Row, Col, Button, Label, Well, Image, Panel } from 'react-bootstrap';
+
 class ViewRecipeDetail extends Component {
 
 	constructor(props) {
@@ -27,24 +29,48 @@ class ViewRecipeDetail extends Component {
 		const recipe = this.state.recipe || {};
 		return(
 			<div>
-			<p><span>RECIPE NAME:</span>{recipe.title}</p>
-			<p><span>DESCRIPTION:</span>{recipe.description}</p>
-			<p><span>INGREDIENTS:</span></p>
-				<ul>
-					{ recipe.ingredients && recipe.ingredients.map((ingredient) => {
-						return (
-							<li> {ingredient.ingredient} </li>
-						)}
-					)}
-				</ul>
-			<p><span>DIRECTIONS:</span></p>
-				<ul>
-					{ recipe.directions && recipe.directions.map((direction) => {
-						return (
-							<li> {direction.step} </li>
-						)}
-					)}
-				</ul>
+				<Grid>
+			    <Row className="show-grid">
+						<Col xs={6} md={4}>
+							<Image width={200} height={200} align="middle" src="../../burger.jpg" circle />
+						</Col>
+			      <Col xs={12} md={8}>
+							<Well>
+								<h1> <Label bsStyle="primary">{recipe.title}</Label> </h1>
+								<br />
+								<h3> Description: </h3>
+								<p> {recipe.description} </p>
+							</Well>
+						</Col>
+			    </Row>
+
+					<Row className="show-grid">
+						<Col md={6} mdPush={6}>
+						<Panel header="Directions:" bsStyle="primary">
+							<ul>
+							{ recipe.directions && recipe.directions.map((direction) => {
+								return (
+									<li> {direction.step} </li>
+								)}
+							)}
+							</ul>
+				    </Panel>
+						</Col>
+			      <Col md={6} mdPull={6}>
+
+							<Panel header="Ingredients:" bsStyle="primary">
+								<ul>
+								{ recipe.ingredients && recipe.ingredients.map((ingredient) => {
+									return (
+										<li> {ingredient.ingredient} </li>
+									)}
+								)}
+								</ul>
+					    </Panel>
+						</Col>
+			    </Row>
+
+				</Grid>
 			</div>
 		)
 	}
