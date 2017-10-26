@@ -89,7 +89,7 @@ class EditRecipePage extends Component {
   handleRemoveDirection = (idx) => (e) => {
     e.preventDefault();
     this.setState({
-      ingredients: this.state.directions.filter((d, id) => idx !== id)
+      directions: this.state.directions.filter((d, id) => idx !== id)
     });
   }
 	handleEdit = (e) => {
