@@ -1,9 +1,15 @@
 import axios from 'axios';
 import APIConstants from '../constants/APIConstants';
 
+const config = {
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': JSON.parse(localStorage.getItem('token'))
+  }
+};
 export function addRecipe(data) {
   return new Promise((resolve, reject) => {
-    axios.post(APIConstants.ADD_RECIPE, data)
+    axios.post(APIConstants.ADD_RECIPE, data, config)
     .then(res => (resolve(res.data)))
     .catch(err => (reject(err.response.data)));
     })
@@ -11,7 +17,7 @@ export function addRecipe(data) {
 
 export function editRecipe(data) {
 	return new Promise((resolve, reject) => {
-		axios.put(APIConstants.EDIT_RECIPE + data._id, data)
+		axios.put(APIConstants.EDIT_RECIPE + data._id, data, config)
 		.then(res => (resolve(res.data)))
 		.catch(err => (reject(err.response.data)));
 	});
@@ -19,7 +25,7 @@ export function editRecipe(data) {
 
 export function editRecipePage(data) {
   return new Promise((resolve, reject) => {
-    axios.get(APIConstants.EDIT_RECIPE + data)
+    axios.get(APIConstants.EDIT_RECIPE + data, config)
     .then(res => (resolve(res.data)))
     .catch(err => (reject(err.response.data)));
   });

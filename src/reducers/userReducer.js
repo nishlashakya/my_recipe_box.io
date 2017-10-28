@@ -1,4 +1,4 @@
-import {logoutUser, saveUser, getUser} from '../utils/sessionManager'
+import {logoutUser, saveUser, getUser, saveUserToken} from '../utils/sessionManager'
 
 const initialState = {
 	loggedInUser: getUser(),
@@ -13,11 +13,12 @@ export function userReducer(state=initialState, action) {
 	switch (action.type) {
 
 		case 'LOGIN_USER_SUCCESS':
-			saveUser(action.res);
+			saveUser(action.res.user);
+			saveUserToken(action.res.token);
 			return {
 				...state,
 				loginSuccess: true,
-				loggedInUser: action.res,
+				loggedInUser: action.res.user,
 				loggedIn: true,
 				loginError: null
 			}

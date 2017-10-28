@@ -2,6 +2,10 @@ export function saveUser(userData) {
   localStorage.setItem('user', JSON.stringify(userData));
 };
 
+export function saveUserToken(token) {
+  localStorage.setItem('token', JSON.stringify(token));
+}
+
 export function logoutUser() {
   localStorage.clear();
   window.location = '/'
