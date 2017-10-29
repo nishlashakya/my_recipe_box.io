@@ -107,7 +107,7 @@ class EditRecipePage extends Component {
 	handleDelete = (e) => {
 		e.preventDefault();
 		this.props.deleteRecipe(e.target.dataset.id)
-		.then((res) => {
+		.then(() => {
 			this.props.router.push('/')
 			console.log('Recipe deleted');
 		})

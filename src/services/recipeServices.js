@@ -1,12 +1,15 @@
 import axios from 'axios';
 import APIConstants from '../constants/APIConstants';
 
+import { getUserToken } from '../utils/sessionManager';
+
 const config = {
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': JSON.parse(localStorage.getItem('token'))
+    'Authorization': getUserToken()
   }
 };
+
 export function addRecipe(data) {
   return new Promise((resolve, reject) => {
     axios.post(APIConstants.ADD_RECIPE, data, config)

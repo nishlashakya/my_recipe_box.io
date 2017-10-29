@@ -17,3 +17,10 @@ export function getUser() {
   }
     return null
 }
+
+export function getUserToken() {
+  if (localStorage.getItem('token')) {
+    return JSON.parse(localStorage.getItem('token'));
+  }
+    return null;
+}
