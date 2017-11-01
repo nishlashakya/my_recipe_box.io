@@ -12,7 +12,7 @@ export function addRecipe(data) {
 			})
 			.catch(err => {
 				dispatch(recipeAddError(err));
-				reject(data);
+				reject(err);
 			})
 		})
 	}

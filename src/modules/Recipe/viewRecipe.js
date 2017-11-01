@@ -33,7 +33,6 @@ class ViewRecipePage extends Component {
                       <p>{recipe.description}</p>
                       <p>
                         <Link to={"/recipe/view/" + recipe._id}>View details</Link>&nbsp;
-
                         <Link to={"/recipe/edit/" + recipe._id}>Edit recipe</Link>&nbsp;
                       </p>
                     </Thumbnail>
