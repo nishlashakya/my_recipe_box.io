@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-
-import {withRouter} from 'react-router'
+import { withRouter } from 'react-router'
 import { connect } from 'react-redux';
-
 import { bindActionCreators } from 'redux';
 
 import { addCategory } from '../../actions/categoryActions'
 
 import { Grid, Row, Col, Well, FieldGroup, FormGroup, ControlLabel, FormControl, Button, Label } from 'react-bootstrap';
-
 
 class AddCategory extends Component {
   constructor(props) {

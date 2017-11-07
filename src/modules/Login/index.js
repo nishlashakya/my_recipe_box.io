@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { toastr } from 'react-redux-toastr';
 
 import {loginUser, logoutUser} from '../../actions/userActions';
 import { Form, FormGroup, FormControl, Col, ControlLabel, Checkbox, Button } from 'react-bootstrap';
@@ -28,6 +29,7 @@ class LoginPage extends Component {
 		.then((res) => {
 			this.props.router.push('/');
 			console.log('login successful');
+			toastr.success('Success', 'successfully logged in');
 		})
 		.catch((err) => {
 			console.log('oops, we got error');
