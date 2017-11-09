@@ -11,6 +11,8 @@ import ViewRecipeDetail from './modules/Recipe/viewRecipeDetail';
 import EditRecipePage from './modules/Recipe/editRecipe';
 
 import AddCategory from './modules/Category/addCategory';
+import ViewCategory from './modules/Category/viewCategory';
+import EditCategory from './modules/Category/editCategory';
 
 function requireAuth(nextState, replace, callback) {
 	const login = localStorage.getItem('user');
@@ -28,5 +30,7 @@ export default (
 		<Route path="/recipe/view/:id" component={ViewRecipeDetail} />
 		<Route path="/recipe/edit/:id" component={EditRecipePage} onEnter={requireAuth}/>
 		<Route path="/category/add" component={AddCategory} />
+		<Route path="/category/view" component={ViewCategory} />
+		<Route path="/category/edit/:id" component={EditCategory} />
 	</Route>
 )

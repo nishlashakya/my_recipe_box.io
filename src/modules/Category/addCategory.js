@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router'
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router'
 
+import { toastr } from 'react-redux-toastr';
+import { bindActionCreators } from 'redux';
 import { addCategory } from '../../actions/categoryActions'
 
 import { Grid, Row, Col, Well, FieldGroup, FormGroup, ControlLabel, FormControl, Button, Label } from 'react-bootstrap';
@@ -30,7 +31,8 @@ class AddCategory extends Component {
         name: '',
         description: ''
       })
-      console.log('mmmmmmmmmmmm', res);
+      this.props.router.push('/category/view');
+      toastr.success('Success', 'Category Added');
     })
     .catch((err) => {
       console.log(',,,,,,,,,,,,,,,,,,,,,', err);
@@ -42,22 +44,6 @@ class AddCategory extends Component {
       <div>
       <Grid>
         <Row className="show-grid">
-          <Col xs={12} md={8}>
-            <Well>
-              <h1> <Label bsStyle="primary">Categories</Label> </h1>
-              <ul>
-              {
-                this.props.categories.map((category, i) => {
-                  return (
-                    <li key={i}> {category.name} </li>
-
-                  )
-                })
-              }
-              </ul>
-
-            </Well>
-          </Col>
           <Col xs={6} md={4}>
             <Well>
               <form>
@@ -97,4 +83,4 @@ const mapDispatchToProps = (dispatch) => {
 	}, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddCategory)
+export default connect(mapStateToProps, mapDispatchToProps) (withRouter(AddCategory))

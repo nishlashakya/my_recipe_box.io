@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {withRouter} from 'react-router'
+import { withRouter } from 'react-router'
 import { connect } from 'react-redux';
 
 import { bindActionCreators } from 'redux';
+import { toastr } from 'react-redux-toastr';
 
 import {editRecipePage, editRecipe, deleteRecipe} from '../../actions/recipeActions';
 import { Form, FormGroup, FormControl, Col, Row, ControlLabel, Button } from 'react-bootstrap';
@@ -96,7 +97,7 @@ class EditRecipePage extends Component {
 		e.preventDefault();
 		this.props.editRecipe(this.state)
 		.then((res) => {
-			console.log('Recipe updated successfully');
+			toastr.success('Success', 'Recipe updated successfully');
 			this.props.router.push('/recipe/view/' + res._id);
 		})
 		.catch((err) => {

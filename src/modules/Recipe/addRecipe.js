@@ -3,6 +3,7 @@ import {withRouter} from 'react-router'
 import { connect } from 'react-redux';
 
 import { bindActionCreators } from 'redux';
+import { toastr } from 'react-redux-toastr';
 
 import {addRecipe} from '../../actions/recipeActions';
 import { Form, FormGroup, FormControl, Col, Row, ControlLabel, Button } from 'react-bootstrap';
@@ -85,7 +86,7 @@ class AddRecipePage extends Component {
 
 		this.props.addRecipe(this.state)
 		.then((res) => {
-			console.log('Recipe added successfully');
+			toastr.success('Success', 'Recipe added successfully');
 			this.props.router.push('/recipe/view/' + res._id);
 		})
 		.catch((err) => {

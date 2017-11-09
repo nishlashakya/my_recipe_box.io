@@ -38,9 +38,9 @@ class Header extends Component {
 							:
 							<ul className="nav navbar-nav navbar-right">
 								<li><Link to={"/recipe/add/"}>Add recipe</Link></li>
-								<li><Link to={"/category/add/"}>Add category</Link></li>
-								<li><a>Welcome {this.props.loggedInUser.firstName}</a></li>
-								<li><Link onClick={this.handleLogout}>Logout</Link></li>
+								<li><Link to={"/category/view/"}>Categories</Link></li>
+								<li><Link>Welcome {this.props.loggedInUser.firstName}</Link></li>
+								<li><button onClick={this.handleLogout}>Logout</button></li>
 							</ul>
 						}
 					</div>

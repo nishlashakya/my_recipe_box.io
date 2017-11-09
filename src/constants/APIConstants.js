@@ -8,5 +8,5 @@ export default {
 		VIEW_RECIPE_DETAIL	: SERVER_URL + 'recipe/view/',
 		VIEW_ALL_RECIPES	  : SERVER_URL + 'recipe/view',
 
-    ADD_CATEGORY        : SERVER_URL + 'category/add'
+    CATEGORY        : SERVER_URL + 'category/'
 }
