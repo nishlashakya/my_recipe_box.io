@@ -29,8 +29,8 @@ export default (
 		<Route path="/recipe/view" component={ViewRecipePage} />
 		<Route path="/recipe/view/:id" component={ViewRecipeDetail} />
 		<Route path="/recipe/edit/:id" component={EditRecipePage} onEnter={requireAuth}/>
-		<Route path="/category/add" component={AddCategory} />
+		<Route path="/category/add" component={AddCategory} onEnter={requireAuth} />
 		<Route path="/category/view" component={ViewCategory} />
-		<Route path="/category/edit/:id" component={EditCategory} />
+		<Route path="/category/edit/:id" component={EditCategory} onEnter={requireAuth} />
 	</Route>
 )

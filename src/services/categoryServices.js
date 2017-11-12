@@ -1,9 +1,17 @@
 import axios from 'axios';
 import APIConstants from '../constants/APIConstants';
+import { getUserToken } from '../utils/sessionManager';
+
+const config = {
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': getUserToken()
+  }
+};
 
 export function addCategory(data) {
   return new Promise(function(resolve, reject) {
-    axios.post(APIConstants.CATEGORY, data)
+    axios.post(APIConstants.CATEGORY, data, config)
     .then(res => (resolve(res.data)))
     .catch(err => (reject(err.response.data)));
   });
@@ -29,7 +37,7 @@ export function deleteCategory(id) {
 export function editCategory(data) {
   console.log('mmmmmmmmmmmmmm', data);
   return new Promise(function(resolve, reject) {
-    axios.put(APIConstants.CATEGORY + data.id, data)
+    axios.put(APIConstants.CATEGORY + data.id, data, config)
     .then(res => (resolve(res.data)))
     .catch(err => (reject(err.response.data)))
   });
