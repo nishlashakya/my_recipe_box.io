@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {viewRecipeDetail} from '../../actions/recipeActions';
+import { viewRecipeDetail } from '../../actions/recipeActions';
+import { getCategory } from '../../actions/categoryActions';
 
 import { Grid, Row, Col, Button, Label, Well, Image, Panel } from 'react-bootstrap';
 
@@ -17,9 +18,17 @@ class ViewRecipeDetail extends Component {
 	componentDidMount() {
 		this.props.viewRecipeDetail(this.props.params.id)
 		.then((recipe) => {
-			this.setState({
-				recipe: recipe[0]
-			});
+			// this.setState({
+			// 	recipe: recipe[0]
+			// });
+			this.props.getCategory(recipe[0].categoryId)
+			.then((category) => {
+				console.log('jjjjjjjjjjjj', category);
+				this.setState({
+					recipe: recipe[0],
+					category: category.name
+				})
+			})
     })
 		.catch((err) => {
 			console.log('oops, we got error');
@@ -27,6 +36,8 @@ class ViewRecipeDetail extends Component {
 	}
 	render() {
 		const recipe = this.state.recipe || {};
+		const category = this.state.category || '';
+
 		return(
 			<div>
 				<Grid>
@@ -40,6 +51,8 @@ class ViewRecipeDetail extends Component {
 								<br />
 								<h3> Description: </h3>
 								<p> {recipe.description} </p>
+								<h3> Category: </h3>
+								<p> {category} </p>
 							</Well>
 						</Col>
 			    </Row>
@@ -85,6 +98,7 @@ const mapStateToProps = (store) => {
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		viewRecipeDetail,
+		getCategory
 	}, dispatch);
 }
 

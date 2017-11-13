@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { toastr } from 'react-redux-toastr';
 
-import {editRecipePage, editRecipe, deleteRecipe} from '../../actions/recipeActions';
+import { editRecipePage, editRecipe, deleteRecipe} from '../../actions/recipeActions';
+import { viewCategory, getCategory } from '../../actions/categoryActions';
 import { Form, FormGroup, FormControl, Col, Row, ControlLabel, Button } from 'react-bootstrap';
 
 class EditRecipePage extends Component {
@@ -25,10 +26,12 @@ class EditRecipePage extends Component {
 				step: '',
 				key: Math.random().toString(36).slice(2)
 			}],
+			categoryId: ''
 		}
 	}
 
   componentWillMount() {
+		this.props.viewCategory();
     this.props.editRecipePage(this.props.params.id)
     .then((recipe) => {
       this.setState({
@@ -38,6 +41,7 @@ class EditRecipePage extends Component {
         photo: recipe.photo,
         ingredients: recipe.ingredients,
         directions: recipe.directions,
+				categoryId: recipe.categoryId
       })
     })
   }
@@ -46,6 +50,11 @@ class EditRecipePage extends Component {
 		this.setState({
 			[e.target.name]: e.target.value
 		})
+	}
+
+	handleSelect = (e) => {
+		e.preventDefault();
+		this.setState({categoryId: e.target.value});
 	}
 
 	handleIngredientChange = (idx) => (e) => {
@@ -109,8 +118,8 @@ class EditRecipePage extends Component {
 		e.preventDefault();
 		this.props.deleteRecipe(e.target.dataset.id)
 		.then(() => {
-			this.props.router.push('/')
-			console.log('Recipe deleted');
+			this.props.router.push('/');
+			toastr.success('Success', 'Recipe deleted successfully')
 		})
 		.catch((err) => {
 			console.log('error!');
@@ -201,6 +210,25 @@ class EditRecipePage extends Component {
 						</Col>
 					</FormGroup>
 
+					<FormGroup controlId="formHorizontalTitle">
+						<Col componentClass={ControlLabel} sm={2}>
+							Select Category:
+						</Col>
+						<Col sm={10}>
+							<div className="form-group">
+								<select className="form-control" value={this.state.categoryId} onChange={this.handleSelect}>
+									<option> </option>
+								{ this.props.categories.map((category, i) => {
+										return (
+											<option value={category._id} className = {category._id === this.state.categoryId && 'selected'} >{category.name}</option>
+										)
+									})
+								}
+								</select>
+							</div>
+						</Col>
+					</FormGroup>
+
 					<FormGroup>
 						<Col smOffset={2} sm={10}>
 							<Button className="button--primary" type="submit" onClick={this.handleEdit}>
@@ -219,7 +247,7 @@ class EditRecipePage extends Component {
 
 const mapStateToProps = (store) => {
 	return {
-		recipeEdit: store.recipe.recipeEdit,
+		categories: store.category.categories
 	}
 }
 
@@ -227,7 +255,9 @@ const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		editRecipePage,
 		editRecipe,
-		deleteRecipe
+		deleteRecipe,
+		viewCategory,
+		getCategory
 	}, dispatch);
 }
 

@@ -40,7 +40,7 @@ class Header extends Component {
 								<li><Link to={"/recipe/add/"}>Add recipe</Link></li>
 								<li><Link to={"/category/view/"}>Categories</Link></li>
 								<li><Link>Welcome {this.props.loggedInUser.firstName}</Link></li>
-								<li><button onClick={this.handleLogout}>Logout</button></li>
+								<li><Link to='#' onClick={this.handleLogout}>Logout</Link></li>
 							</ul>
 						}
 					</div>

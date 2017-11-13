@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { toastr } from 'react-redux-toastr';
 
-import {addRecipe} from '../../actions/recipeActions';
+import { addRecipe } from '../../actions/recipeActions';
+import { viewCategory } from '../../actions/categoryActions';
 import { Form, FormGroup, FormControl, Col, Row, ControlLabel, Button } from 'react-bootstrap';
 
 class AddRecipePage extends Component {
@@ -25,7 +26,12 @@ class AddRecipePage extends Component {
 				step: '',
 				key: Math.random().toString(36).slice(2)
 			}],
+			categoryId: ''
 		}
+	}
+
+	componentDidMount = () => {
+		this.props.viewCategory();
 	}
 
 	handleChange = (e) => {
@@ -92,8 +98,11 @@ class AddRecipePage extends Component {
 		.catch((err) => {
 			console.log('oops, we got error');
 		})
+	}
 
-
+	handleSelect = (e) => {
+		e.preventDefault();
+		this.setState({categoryId: e.target.value});
 	}
 	render() {
 		return (
@@ -180,6 +189,25 @@ class AddRecipePage extends Component {
 						</Col>
 					</FormGroup>
 
+					<FormGroup controlId="formHorizontalTitle">
+						<Col componentClass={ControlLabel} sm={2}>
+							Select Category:
+						</Col>
+						<Col sm={10}>
+							<div className="form-group">
+								<select className="form-control" value={this.state.categoryId} onChange={this.handleSelect}>
+									<option> </option>
+								{ this.props.categories.map((category, i) => {
+										return (
+											<option value={category._id}>{category.name}</option>
+										)
+									})
+								}
+								</select>
+							</div>
+						</Col>
+					</FormGroup>
+
 					<FormGroup>
 						<Col smOffset={2} sm={10}>
 							<Button className="button--primary" type="submit" onClick={this.handleAddRecipe}>
@@ -196,6 +224,7 @@ class AddRecipePage extends Component {
 const mapStateToProps = (store) => {
 	return {
 		recipes: store.recipe.recipes,
+		categories: store.category.categories,
 		recipeAddSuccesss: store.recipe.recipeAddSuccesss,
 	}
 }
@@ -203,6 +232,7 @@ const mapStateToProps = (store) => {
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		addRecipe,
+		viewCategory
 	}, dispatch);
 }
 

@@ -60,7 +60,7 @@ export function recipeReducer(state=initialState, action) {
 				...state,
 				recipeEditPageSuccess: true,
 				recipeEditPageError: null,
-				recipeEdit: action.res
+				detailRecipe : action.res
 			}
 
 		case 'EDIT_RECIPE_PAGE_ERROR':
