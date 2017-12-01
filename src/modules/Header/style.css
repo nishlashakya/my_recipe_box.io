@@ -7,4 +7,17 @@
 #myNav .navbar-brand {
 	color: #00d8ff
 }
-
+#dropdown-button-header {
+	text-decoration: none;
+	margin-top: 9px;
+	background: #222222;
+	border: none;
+	color: #999585;
+}
+#dropdown-button-header:hover {
+	text-decoration: none;
+	margin-top: 9px;
+	background: #222222;
+	border: none;
+	color: white;
+}

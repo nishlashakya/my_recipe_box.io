@@ -14,6 +14,8 @@ import AddCategory from './modules/Category/addCategory';
 import ViewCategory from './modules/Category/viewCategory';
 import EditCategory from './modules/Category/editCategory';
 
+import Dashboard from './modules/Users/dashboard';
+
 function requireAuth(nextState, replace, callback) {
 	const login = localStorage.getItem('user');
 	if (!login) replace ('/login')
@@ -32,5 +34,6 @@ export default (
 		<Route path="/category/add" component={AddCategory} onEnter={requireAuth} />
 		<Route path="/category/view" component={ViewCategory} />
 		<Route path="/category/edit/:id" component={EditCategory} onEnter={requireAuth} />
+		<Route path="/users/dashboard/:id" component={Dashboard} />
 	</Route>
 )

@@ -65,3 +65,33 @@ function regigisterUserError(err) {
     err
   }
 }
+
+export function getUser(id) {
+  return dispatch => {
+    return new Promise((resolve, reject) => {
+      userServices.getUser(id)
+      .then(res => {
+        dispatch(getUserSuccess(res));
+        resolve(res);
+      })
+      .catch(err => {
+        dispatch(getUserError(err));
+        reject(err);
+      })
+    });
+  }
+}
+
+function getUserSuccess(res) {
+  return {
+    type: 'GET_USER_SUCCESS',
+    res
+  }
+}
+
+function getUserError(err) {
+  return {
+    type: 'GET_USER_ERROR',
+    err
+  }
+}
