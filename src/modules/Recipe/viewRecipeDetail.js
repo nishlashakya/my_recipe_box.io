@@ -18,12 +18,8 @@ class ViewRecipeDetail extends Component {
 	componentDidMount() {
 		this.props.viewRecipeDetail(this.props.params.id)
 		.then((recipe) => {
-			// this.setState({
-			// 	recipe: recipe[0]
-			// });
 			this.props.getCategory(recipe[0].categoryId)
 			.then((category) => {
-				console.log('jjjjjjjjjjjj', category);
 				this.setState({
 					recipe: recipe[0],
 					category: category.name
