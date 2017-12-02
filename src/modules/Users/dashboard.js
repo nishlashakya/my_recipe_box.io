@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux';
 import { Col, Row, Tab, Container, Nav, NavItem, Well} from 'react-bootstrap';
 import { getUser } from '../../actions/userActions';
 
+import Profile from './Profile';
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -44,8 +46,9 @@ class Dashboard extends Component {
               </Tab.Pane>
               <Tab.Pane eventKey="second">
                 <Well>
-                <h1> Edit profile </h1>
-
+                  <Profile
+                    user={this.props.user}
+                  />
                 </Well>
               </Tab.Pane>
             </Tab.Content>
@@ -70,4 +73,4 @@ const mapDispatchToProps = (dispatch) => {
 );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Dashboard))
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

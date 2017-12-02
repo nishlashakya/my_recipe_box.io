@@ -42,7 +42,7 @@ class Header extends Component {
 								<li><Link to={"/recipe/add/"}>Add recipe</Link></li>
 								<li><Link to={"/category/view/"}>Categories</Link></li>
 								<li>
-									<DropdownButton title= {"Welcome " + this.props.loggedInUser.firstName} id="dropdown-button-header">
+									<DropdownButton title={"Welcome " + this.props.loggedInUser.firstName} id="dropdown-button-header">
 										<MenuItem eventKey="1" href={'/users/dashboard/' + this.props.loggedInUser._id}>Dashboard</MenuItem>
 										<MenuItem eventKey="2" onClick={this.handleLogout} >Logout</MenuItem>
 									</DropdownButton>
