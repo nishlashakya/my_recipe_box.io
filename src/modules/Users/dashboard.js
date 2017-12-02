@@ -13,7 +13,7 @@ class Dashboard extends Component {
   componentDidMount() {
     this.props.getUser(this.props.params.id)
     .then(res => {
-      console.log('.................res...', res);
+      console.log('............res...', res);
     })
   }
   render() {
